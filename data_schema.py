@@ -25,11 +25,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, mapper
 
 
-from config import *
+'''
 
-data_sqlite_db = create_engine('sqlite://%s:%s@%s/%s' % (data_sqlite_db_user, data_sqlite_db_pass, data_sqlite_db_host, data_sqlite_db_db))
-
-#data_sqlite_db.echo = True     #uncomment for db debug
 metadata = MetaData(data_sqlite_db)
 
 phil_table = Table('phil', metadata,
@@ -131,8 +128,16 @@ table = phil_table.insert()
 #table.execute(metadata)
 #table.commit()
 
+'''
+
+#TODO: CUT
+'''
 def get_highest_index_in_table(session, table_obj):
     return int(session.query(table_obj.id).order_by(desc(table_obj.id)).first()[0])
+'''
+
+# TODO: rename this to cdc_phil_lib
+#data_table = db.phil
 
 def get_highest_index_in_our_db():
     return get_highest_index_in_table(data_sqlite_session, Phil)
@@ -169,6 +174,3 @@ def get_dict_of_images_to_dl(db_column_name, flag_table):
             del id_dict[id_rm]
 
     return id_dict
-
-#if __name__ == '__main__':
-#    test_db()
